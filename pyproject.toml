@@ -1,0 +1,15 @@
+[project]
+name = "tg-tt"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "python-telegram-bot==20.8",
+    "aws-lambda-powertools>=3.28.0",
+]
+
+[dependency-groups]
+dev = [
+    "boto3",
+]
