@@ -35,31 +35,29 @@ ALLOWED_USERS = {
 }
 
 
-def is_authorized(user_id: int) -> bool:
-    if user_id in ALLOWED_USERS:
-        return True
-    logger.info({"message": "Unauthorized access attempt", "user_id": user_id})
-    return False
+def require_auth(handler):
+    def auth_middleware(update: Update, context):
+        user_id = -1
+        if update.effective_user is not None:
+            user_id = update.effective_user.id
+        if user_id not in ALLOWED_USERS:
+            logger.info({"message": "Unauthorized access attempt", "user_id": user_id})
+            return
+        return handler(update, context)
+
+    return auth_middleware
 
 
+@require_auth
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     assert update.effective_user is not None and update.message is not None
-
-    user_id = update.effective_user.id
-    if not is_authorized(user_id):
-        return
-
     await update.message.reply_text(f"You said {update.message.text}")
 
 
-# Handle /start command
+@require_auth
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     logger.info({"message": "Entering /start"})
-    assert update.effective_user is not None and update.message is not None
-    user_id = update.effective_user.id
-    if not is_authorized(user_id):
-        return
-
+    assert update.message is not None
     await update.message.reply_text("Hello world!")
 
 
