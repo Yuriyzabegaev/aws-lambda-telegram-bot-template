@@ -33,6 +33,7 @@ if ! aws iam get-role --role-name "${ROLE_NAME}" &>/dev/null; then
 
   aws iam create-role \
     --role-name "${ROLE_NAME}" \
+    --no-cli-pager \
     --assume-role-policy-document '{
       "Version": "2012-10-17",
       "Statement": [{
@@ -78,7 +79,8 @@ if aws lambda get-function --function-name "${LAMBDA_NAME}" &>/dev/null; then
 
   aws lambda update-function-code \
     --function-name "${LAMBDA_NAME}" \
-    --zip-file fileb://dist/lambda.zip
+    --zip-file fileb://dist/lambda.zip \
+    --no-cli-pager
 
   success "Lambda '${LAMBDA_NAME}' updated."
 else
