@@ -175,7 +175,7 @@ wheels = [
 ]
 
 [[package]]
-name = "tg-tt"
+name = "my-lambda"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
