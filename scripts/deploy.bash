@@ -2,6 +2,10 @@
 
 set -euo pipefail
 
+if [ -f .env ]; then
+  source .env
+fi
+
 # ── Helpers ───────────────────────────────────────────────────────────────────
 info()    { echo "[INFO]  $*"; }
 success() { echo "[OK]    $*"; }

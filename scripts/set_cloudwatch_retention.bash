@@ -2,6 +2,10 @@
 
 set -euo pipefail
 
+if [ -f .env ]; then
+  source .env
+fi
+
 # ── Config ────────────────────────────────────────────────────────────────────
 LAMBDA_NAME="${LAMBDA_NAME:?Error: LAMBDA_NAME is not set}"
 RETENTION_DAYS=3

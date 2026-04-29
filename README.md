@@ -17,11 +17,10 @@ You will need:
 - your telegram account id, as the hello-world bot responds only to the allow-list of users.
 
 # Deployment
+First, rename `.env.example` into `.env` and set your values for the environmental variables. 
+
 TLDR:
 ```
-export ALLOWED_USERS=<your_telegram_account_id>
-export TELEGRAM_BOT_TOKEN=<your_telegram_bot_token>
-export LAMBDA_NAME=<name_of_your_choice>
 bash scripts/build.bash && \
 bash scripts/deploy.bash && \
 bash scripts/register_telegram_webhook.bash && \
