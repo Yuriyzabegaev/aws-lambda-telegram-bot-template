@@ -1,0 +1,4 @@
+lambda_name   =
+aws_region    = "eu-north-1"
+allowed_users =
+telegram_token =

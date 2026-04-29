@@ -35,14 +35,3 @@ RESPONSE=$(curl --silent --show-error \
 echo "${RESPONSE}" | grep -q '"ok":true' \
   && success "Webhook registered: ${AWS_API_GATEWAY}" \
   || error "Telegram webhook failed. Response: ${RESPONSE}"
-
-# ── Store Token in SSM ────────────────────────────────────────────────────────
-info "Storing Telegram token in SSM Parameter Store..."
-
-aws ssm put-parameter \
-  --name "/${LAMBDA_NAME}/telegram-token" \
-  --value "${TELEGRAM_BOT_TOKEN}" \
-  --type SecureString \
-  --overwrite
-
-success "Token stored at '/${LAMBDA_NAME}/telegram-token'."
